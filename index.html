@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiLearnPH - Digital Literacy for All Ages</title>
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #ff7e5f;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --font-large: 1.5rem;
+            --font-medium: 1.2rem;
+            --font-normal: 1rem;
+            --font-small: 0.875rem;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), #3a5a8a);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: var(--font-large);
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .hero {
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: var(--font-medium);
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #ff6b4d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: var(--font-medium);
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-card p {
+            color: #666;
+        }
+        
+        .audience-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .tab-btn {
+            padding: 1rem 2rem;
+            background-color: #e9ecef;
+            border: none;
+            cursor: pointer;
+            font-size: var(--font-medium);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:first-child {
+            border-radius: 50px 0 0 50px;
+        }
+        
+        .tab-btn:last-child {
+            border-radius: 0 50px 50px 0;
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .resource-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-img {
+            height: 180px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .resource-content {
+            padding: 1.5rem;
+        }
+        
+        .resource-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .resource-content p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: var(--font-small);
+        }
+        
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 0.8rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-youth {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .badge-senior {
+            background-color: #fff8e1;
+            color: #ff8f00;
+        }
+        
+        .cta {
+            background-color: var(--primary);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            border-radius: 10px;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            font-size: var(--font-medium);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #adb5bd;
+            font-size: var(--font-small);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: var(--font-normal);
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-laptop-code"></i>
+                <span>DigiLearnPH</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Digital Literacy for All Ages</h1>
+            <p>Empowering youth to use technology wisely and helping seniors navigate the digital world safely.</p>
+            <a href="#resources" class="btn">Get Started</a>
+            <a href="#features" class="btn btn-outline">Learn More</a>
+        </div>
+    </section>
+    
+    <section class="container" id="features">
+        <div class="section-title">
+            <h2>Why Digital Literacy Matters</h2>
+            <p>In today's connected world, everyone needs the skills to use technology safely and effectively, regardless of age.</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Online Safety</h3>
+                <p>Learn how to protect yourself from scams, phishing, and other online threats that target both young and old users.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Device Basics</h3>
+                <p>Master the fundamentals of smartphones, computers, and tablets with age-appropriate guidance.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-search"></i>
+                <h3>Smart Searching</h3>
+                <p>Discover how to find reliable information online and avoid misinformation and fake news.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>Communication</h3>
+                <p>Stay connected with family and friends through messaging apps, video calls, and social media.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-lock"></i>
+                <h3>Privacy Protection</h3>
+                <p>Understand how to manage your digital footprint and keep personal information secure.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-piggy-bank"></i>
+                <h3>Digital Banking</h3>
+                <p>Learn safe online banking and payment methods to handle finances digitally with confidence.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="container" id="resources">
+        <div class="section-title">
+            <h2>Learning Resources</h2>
+            <p>Customized content for different age groups to address their specific digital literacy needs.</p>
+        </div>
+        
+        <div class="audience-tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'youth')">For Youth</button>
+            <button class="tab-btn" onclick="openTab(event, 'seniors')">For Seniors</button>
+        </div>
+        
+        <div id="youth" class="tab-content active">
+            <div class="resources">
+                <div class="resource-card">
+                    <div class="resource-img" style="background-image: url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="resource-content">
+                        <span class="badge badge-youth">Youth</span>
+                        <h3>Social Media Responsibility</h3>
+                        <p>Learn how to use social platforms wisely and understand the long-term impact of your digital footprint.</p>
+                        <div class="resource-meta">
+                            <span><i class="far fa-clock"></i> 15 min</span>
+                            <span>Beginner</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-img" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="resource-content">
+                        <span class="badge badge-youth">Youth</span>
+                        <h3>Cybersecurity Basics</h3>
+                        <p>Essential tips for creating strong passwords, recognizing scams, and protecting your devices.</p>
+                        <div class="resource-meta">
+                            <span><i class="far fa-clock"></i> 20 min</span>
+                            <span>Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-img" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="resource-content">
+                        <span class="badge badge-youth">Youth</span>
+                        <h3>Digital Productivity Tools</h3>
+                        <p>Master tools for school and work like Google Docs, spreadsheets, and presentation software.</p>
+                        <div class="resource-meta">
+                            <span><i class="far fa-clock"></i> 25 min</span>
+                            <span>Beginner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="seniors" class="tab-content">
+            <div class="resources">
+                <div class="resource-card">
+                    <div class="resource-img" style="background-image: url('https://images.unsplash.com/photo-1581093450021-4a7360e9a7f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="resource-content">
+                        <span class="badge badge-senior">Senior</span>
+                        <h3>Smartphone Basics</h3>
+                        <p>Step-by-step guide to using smartphones for calls, messages, photos, and essential apps.</p>
+                        <div class="resource-meta">
+                            <span><i class="far fa-clock"></i> 30 min</span>
+                            <span>Beginner</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-img" style="background-image: url('https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="resource-content">
+                        <span class="badge badge-senior">Senior</span>
+                        <h3>Avoiding Online Scams</h3>
+                        <p>Learn to recognize common scams targeting seniors and how to protect yourself.</p>
+                        <div class="resource-meta">
+                            <span><i class="far fa-clock"></i> 20 min</span>
+                            <span>Beginner</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-img" style="background-image: url('https://images.unsplash.com/photo-1581094271901-8022df4466f9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="resource-content">
+                        <span class="badge badge-senior">Senior</span>
+                        <h3>Video Calling Family</h3>
+                        <p>Simple instructions for using video call apps to stay connected with loved ones.</p>
+                        <div class="resource-meta">
+                            <span><i class="far fa-clock"></i> 15 min</span>
+                            <span>Beginner</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <h2>Ready to Improve Your Digital Skills?</h2>
+        <p>Whether you're a tech-savvy youth looking to use technology more responsibly or a senior wanting to learn the basics, we have resources tailored for you.</p>
+        <a href="#" class="btn">Join Our Community</a>
+    </section>
+    
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>DigiLearnPH</h3>
+                <p>Bridging the digital divide by providing age-appropriate digital literacy education for all Filipinos.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">For Youth</a></li>
+                    <li><a href="#">For Seniors</a></li>
+                    <li><a href="#">Video Tutorials</a></li>
+                    <li><a href="#">Printable Guides</a></li>
+                    <li><a href="#">Glossary of Terms</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> info@digilearnph.com</li>
+                    <li><i class="fas fa-phone"></i> (02) 8123 4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Manila, Philippines</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 DigiLearnPH. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--secondary);"></i> for Filipinos</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Tab functionality
+        function openTab(evt, tabName) {
+            var i, tabcontent, tabbuttons;
+            
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            tabbuttons = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].classList.remove("active");
+            }
+            
+            // Show the current tab and add active class to the button
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        // Mobile menu toggle (would need additional implementation)
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
