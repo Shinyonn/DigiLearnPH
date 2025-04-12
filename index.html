@@ -721,3 +721,227 @@
     </script>
 </body>
 </html>
+<!-- ======= Add this NEW SECTION below your existing code ======= -->
+<section class="container" id="video-tutorials">
+    <div class="section-title">
+        <h2>Video Tutorials</h2>
+        <p>Watch step-by-step guides for both youth and seniors to learn digital skills visually.</p>
+    </div>
+
+    <div class="audience-tabs">
+        <button class="tab-btn active" onclick="openVideoTab(event, 'youth-videos')">For Youth</button>
+        <button class="tab-btn" onclick="openVideoTab(event, 'senior-videos')">For Seniors</button>
+    </div>
+
+    <div id="youth-videos" class="tab-content active">
+        <div class="resources">
+            <div class="video-card" onclick="openVideoModal('https://www.youtube.com/embed/3xNTNDIYkNE')">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/3xNTNDIYkNE/hqdefault.jpg" alt="Social Media Safety">
+                    <div class="play-button"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="video-info">
+                    <span class="badge badge-youth">Youth</span>
+                    <h3>Social Media Safety Guide</h3>
+                    <p>Learn how to protect your privacy on social media platforms.</p>
+                    <div class="video-meta">
+                        <span><i class="far fa-clock"></i> 12 min</span>
+                        <span>Beginner</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideoModal('https://www.youtube.com/embed/JpqMjFZxtk4')">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/JpqMjFZxtk4/hqdefault.jpg" alt="Cybersecurity Basics">
+                    <div class="play-button"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="video-info">
+                    <span class="badge badge-youth">Youth</span>
+                    <h3>Cybersecurity Basics</h3>
+                    <p>Essential tips to protect yourself from online threats.</p>
+                    <div class="video-meta">
+                        <span><i class="far fa-clock"></i> 15 min</span>
+                        <span>Intermediate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="senior-videos" class="tab-content">
+        <div class="resources">
+            <div class="video-card" onclick="openVideoModal('https://www.youtube.com/embed/sL0I9i4Gf9A')">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/sL0I9i4Gf9A/hqdefault.jpg" alt="Smartphone Basics">
+                    <div class="play-button"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="video-info">
+                    <span class="badge badge-senior">Senior</span>
+                    <h3>Smartphone Basics for Beginners</h3>
+                    <p>Step-by-step guide to using your first smartphone.</p>
+                    <div class="video-meta">
+                        <span><i class="far fa-clock"></i> 18 min</span>
+                        <span>Beginner</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-card" onclick="openVideoModal('https://www.youtube.com/embed/6O8LTwVfTVs')">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/6O8LTwVfTVs/hqdefault.jpg" alt="Avoiding Scams">
+                    <div class="play-button"><i class="fas fa-play"></i></div>
+                </div>
+                <div class="video-info">
+                    <span class="badge badge-senior">Senior</span>
+                    <h3>How to Avoid Online Scams</h3>
+                    <p>Recognize and protect yourself from common internet scams.</p>
+                    <div class="video-meta">
+                        <span><i class="far fa-clock"></i> 20 min</span>
+                        <span>Beginner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video Modal -->
+<div id="videoModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeVideoModal()">&times;</span>
+        <iframe id="videoFrame" width="100%" height="500" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<!-- ======= Add this CSS at the end of your style section ======= -->
+<style>
+    /* Video Cards */
+    .video-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s;
+        cursor: pointer;
+        margin-bottom: 2rem;
+    }
+    
+    .video-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .video-thumbnail {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
+    }
+    
+    .video-thumbnail img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background-color: rgba(255, 126, 95, 0.8);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+    }
+    
+    .video-info {
+        padding: 1.5rem;
+    }
+    
+    /* Modal */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    .modal-content {
+        position: relative;
+        margin: 5% auto;
+        padding: 20px;
+        width: 80%;
+        max-width: 900px;
+    }
+    
+    .close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+        .modal-content {
+            width: 95%;
+            margin: 10% auto;
+        }
+        
+        .video-thumbnail {
+            height: 150px;
+        }
+    }
+</style>
+
+<!-- ======= Add this JavaScript at the end of your script section ======= -->
+<script>
+    // Video Modal Functions
+    function openVideoModal(videoUrl) {
+        document.getElementById('videoFrame').src = videoUrl;
+        document.getElementById('videoModal').style.display = 'block';
+    }
+    
+    function closeVideoModal() {
+        document.getElementById('videoFrame').src = '';
+        document.getElementById('videoModal').style.display = 'none';
+    }
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('videoModal');
+        if (event.target == modal) {
+            closeVideoModal();
+        }
+    }
+    
+    // Video Tab Functionality
+    function openVideoTab(evt, tabName) {
+        var i, tabcontent, tabbuttons;
+        
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].classList.remove("active");
+        }
+        
+        tabbuttons = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tabbuttons.length; i++) {
+            tabbuttons[i].classList.remove("active");
+        }
+        
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+</script>
